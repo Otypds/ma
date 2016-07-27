@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+ <head>
+     <meta name="viewport" content="width=device-width" />
+     <title>Calculate Attendance</title>
+     <style type="text/css">
+         body{
+         background: #00C9FF; 
+         background: -webkit-linear-gradient(to left, #00C9FF , #92FE9D); 
+        background: linear-gradient(to left, #00C9FF , #92FE9D);  
+         }
+         #header{ 
+             display: block;
+             letter-spacing: 1px;
+             width:100%;
+             text-align: center;
+             font-size: 50px;
+             font-family: serif;
+             color:#f857a6 ;
+             border-radius: 10px;
+             background-color: aqua;
+         }
+         #inpu{
+             width:auto;
+             margin:20px 20px 20px 20px;
+             border-radius: 10px;
+             border-style: ridge;
+             border-color: darkgreen;
+         }
+         #inpu ol li {
+             list-style-type:none;
+             text-align:center;
+             padding: 20px;
+         }
+         #inpu ol li input{
+             text-align: center;
+             box-sizing: border-box;
+             padding: 10px;
+             border-top-style: hidden;
+             border-left-style: hidden;
+             border-right-style: hidden;
+             border-bottom-style: inset;
+             border-radius: 40px;
+             background-color: white;
+         }
+           .sub{
+             text-align: center;
+             box-sizing: border-box;
+             padding: 10px;
+             border-top-style: hidden;
+             border-left-style: hidden;
+             border-right-style: hidden;
+             border-bottom-style: inset;
+             border-radius: 60px;
+             background-color: white;
+             color:green;
+         }
+         .sub:hover{
+             background-color: deeppink;
+             color: white;
+         }
+         #outpu li {
+             list-style-type:none;
+             text-align:center;
+             padding: 20px;
+         }
+     </style> 
+           <script>
+ var totalClasses=function(){
+ var noInitialDays=document.getElementById("inhowManyDays").value;
+ var noClassEachDay= document.getElementById("inhowManyClass").value;
+ var noHolidays=document.getElementById("inHolidays").value;
+ var noNotCountClasses=document.getElementById("inNoperiods").value;
+  var el=document.getElementById("disTotalClasses");
+  var toClass=(((noInitialDays*noClassEachDay)-(noHolidays*noClassEachDay))-(noNotCountClasses));
+  el.innerHTML="Total Classes"+":"+toClass;
+  return toClass;
+ }
+ var absentClasses=function(){
+   var noBunkClasses=document.getElementById("inBunk").value;
+   var toPresent=totalClasses()-noBunkClasses;
+   var fl=document.getElementById("disAbsentClasses");
+   fl.innerHTML="Attended Classes"+":"+toPresent;
+   return toPresent;
+ }
+ var attendance=function(){
+   var attend=(absentClasses()/totalClasses())*100;
+   var gl=document.getElementById("disAttendance");
+   gl.innerHTML="Attendance"+":"+attend;
+   return attend;
+ }
+ </script>
+</head>
+ <body>
+     <div id="container">
+         <div id="header">
+             <h>Bunk Manager</h></div>
+             <div id="inpu">
+                 <ol>
+                     <li><input type="number" id="inhowManyDays" placeholder="Days" /></li>
+                     <li><input type="number" id="inhowManyClass" placeholder="Classes per day" /></li>
+                     <li><input type="number" id="inHolidays" placeholder="Holidays" /></li>
+                     <li><input type="number" id="inNoperiods" placeholder="Not Accountable Classes" onchange="totalClasses();" /></li>
+                     <li><input type="number" id="inBunk" placeholder="Bunks" onchange="absentClasses();" /></li>
+                      <input type="submit" onclick="attendance();" value="Calculate" class="sub"/>
+                 </ol>
+         </div>
+                 <div style="font-size:20px;color:deeppink;" id="outpu">
+                    <li id="disTotalClasses"></li>
+                    <li id="disAbsentClasses"></li>
+                    <li id="disAttendance"></li>
+                   </div>           
+     </div>
+        
+</body>
+</html>
